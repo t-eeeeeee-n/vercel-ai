@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  nextjs:
+    container_name: "vercel-ai"
+    image: "vercel-ai"
+    build:
+      context: .
+      dockerfile: docker/next/Dockerfile
+    working_dir: /var/www/html
+    volumes:
+      - ./front/src:/var/www/html
+    tty: true
+#    command: "npm run dev"
+    ports:
+      - "3000:3000"
+
+#  nginx:
+#    container_name: "vercel-ai-nginx-container"
+#    image: "vercel-ai-nginx-image-local"
+#    build:
+#      context: .
+#      dockerfile: ./docker/nginx/Dockerfile
+#    working_dir: /var/www/html
+#    volumes:
+#      - ./docker/nginx/config/default.conf:/etc/nginx/conf.d/default.conf
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - nextjs
